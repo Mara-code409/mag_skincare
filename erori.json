@@ -1,0 +1,25 @@
+{
+    "cale_baza": "/imagini/erori",
+    "statusuri": {
+        "403": {
+            "titlu": "Forbidden",
+            "text": "Nu aveți permisiunea de a accesa această resursă!",
+            "imagine": "error-403.png"
+        },
+        "404": {
+            "titlu": "Not Found",
+            "text": "Pagina pe care o căutați nu există.",
+            "imagine": "error-404.png"
+        },
+        "400": {
+            "titlu": "Bad Request",
+            "text": "Cererea trimisă către server conține erori.",
+            "imagine": "error-400.png"
+        }
+    },
+    "eroare_default": {
+        "titlu": "Eroare",
+        "text": "A apărut o eroare neașteptată.",
+        "imagine": "error-general.png"
+    }
+}

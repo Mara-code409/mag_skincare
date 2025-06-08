@@ -1,0 +1,1140 @@
+/* 1. VARIABILE */
+
+:root {
+  --color-primary: #A6D8D4;
+  --color-secondary: #F6DFEB;
+  --color-text: #333333;
+  --color-border: #B8B2A7;
+  --color-highlight: #F7F6F2;
+  --padding-zone: 2%;
+  --padding-lateral: 5%;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --bg-card: #FFFFFF;
+  --padding-mic: 10px;
+  --padding-mediu: 3%;
+  --gap-grid-mic: 5px;
+  --gap-grid-mediu: 10px;
+}
+  
+* {
+  box-sizing: border-box;
+}
+  
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-highlight);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 18px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Delius", cursive;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 2. GRID */
+
+.grid-container {
+  display: grid;
+  width: calc(100% - 2*var(--padding-lateral));
+  margin-left: var(--padding-lateral);
+  margin-right: var(--padding-lateral);
+  grid-template-areas:
+    "header header header header"
+    "zona1 zona1 zona1 zona1"
+    "zona5 zona6 zona6 zona7"
+    "zona3 zona3 zona2 zona2"
+    "zona4 zona4 zona2 zona2"
+    "zona8 zona8 zona8 zona8"
+    "footer footer footer footer";
+  grid-template-columns: 25% 25% 25% 25%;
+  gap: 1%;
+}
+
+/* 3. ZONE */
+
+.header {
+  grid-area: header;
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--padding-zone);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+main {
+  padding: var(--padding-zone);
+  display: contents;
+}
+  
+.footer {
+  grid-area: footer;
+  background-color: var(--color-border);
+  color: white;
+  padding: var(--padding-zone);
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+/* Stiluri comune pentru zone */
+.zona1,
+.zona2,
+.zona3,
+.zona4,
+.zona5,
+.zona6,
+.zona7,
+.zona8,
+#zona1,
+#zona2,
+#zona3,
+#zona4,
+#zona5,
+#zona6,
+#zona7,
+#zona8 {
+  padding: var(--padding-zone);
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  
+/* Zona 1 - Banner */
+.zona1, #zona1 {
+  grid-area: zona1;
+}
+  
+/* Zona 2 - Produse populare */
+.zona2, #zona2 {
+  grid-area: zona2;
+}
+  
+/* Zona 3 - Calendar evenimente */
+.zona3, #zona3 {
+  grid-area: zona3;
+}
+  
+/* Zona 4 - Intrebari frecvente */
+.zona4, #zona4 {
+  grid-area: zona4;
+}
+  
+/* Zona 5 - Utilizatori online */
+.zona5, #zona5 {
+  grid-area: zona5;
+}
+  
+/* Zona 6 - Statistici */
+.zona6, #zona6 {
+  grid-area: zona6;
+}
+  
+/* Zona 7 - Informații server */
+.zona7, #zona7 {
+  grid-area: zona7;
+}
+  
+/* Zona 8 - Video section */
+.zona8, #zona8 {
+  grid-area: zona8;
+}
+
+/* 4. LINK-TOP */
+
+/* Stilul pentru butonul "link-top" */
+#link-top {
+  position: fixed;
+  bottom: 20px;
+  left: 2.5%;
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+  transition: all 0.5s ease;
+  z-index: 1000;
+  transform: translateX(-50%);
+}
+
+#link-top a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-highlight); /* Culoare de fundal din paleta ta */
+  border-radius: 50% 50% 50% 50%;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  border: 1px solid var(--color-border); /* Bordură cu culoare din paleta ta */
+}
+
+#triunghi {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: var(--color-text); /* Culoare text din paleta ta */
+  transition: transform 0.5s ease;
+}
+
+/* Tooltip */
+#link-top a::before {
+  content: "Du-mă sus!";
+  position: absolute;
+  background-color: var(--color-primary); /* Culoare de fundal tooltip din paleta ta */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#link-top a:hover::after {
+  content: "Du-mă sus!";
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 10px;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  white-space: wrap;
+  z-index: 1001;
+  line-height: 1.2;
+}
+
+#link-top:hover #triunghi {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* 5. TABEL */
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 30px;
+  padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 5px inset #f7c8db;
+  margin-bottom: 10px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 15px 10px;
+  font-weight: bold;
+  color: #b05c7f;
+  margin-top: 10px;
+  font-size: 0.95em;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+thead {
+  background-color: #b05c7f;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fff0f5;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #fef9fb;
+}
+
+/* Bordere cu culori alternante */
+tbody tr:nth-child(odd) {
+  border-bottom: 1px solid #f7c8db;
+  /* c1  */
+}
+
+tbody tr:nth-child(even) {
+  border-bottom: 1px solid #b05c7f;
+  /* c2 */
+}
+
+tfoot {
+  background-color: #b05c7f;
+  color: white;
+  font-weight: bold;
+}
+
+/* Outline la hover cu tranziție */
+tbody tr {
+  position: relative;
+  transition: outline 0.5s ease;
+  outline: 0px solid rgba(176, 92, 127, 0);
+}
+
+tbody tr:hover {
+  outline: 5px solid rgba(176, 92, 127, 0.7);
+}
+
+.important {
+  background-color: #fde2ec;
+  font-weight: bold;
+}
+
+.discount {
+  color: #e63e62;
+  font-weight: bold;
+}
+
+.location {
+  font-style: italic;
+  color: #666;
+}
+
+/* 6. IMAGINI & MEDIA */
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+  
+figure {
+  margin: 0 0 1rem 0;
+}
+  
+figcaption {
+  font-style: italic;
+  text-align: center;
+  font-size: 0.9em;
+  padding: 1%;
+}
+  
+/* Container iframe și video */
+.container-iframe {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+  
+.container-iframe>iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  border: 4px solid var(--color-secondary);
+  display: block;
+  margin-bottom: 0;
+  order: 1;
+}
+  
+/* Taburi iframe */
+.taburi-iframe {
+  display: flex;
+  width: 50%;
+  align-self: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2px;
+  order: 2;
+}
+  
+.taburi-iframe>a {
+  flex: 1;
+  padding: 10px 8px;
+  text-align: center;
+  background: var(--color-highlight);
+  color: var(--color-primary);
+  text-decoration: none;
+  border: 2px solid var(--color-secondary);
+  border-top: none;
+  border-radius: 0 0 25px 25px;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: background-color 0.3s, color 0.3s;
+  white-space: normal;
+  height: auto;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
+.taburi-iframe>a:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* 7. SECȚIUNI & ARTICOLE */
+
+section {
+  margin-bottom: 2rem;
+}
+
+article {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 8. RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-areas:
+      "header header"
+      "zona1 zona1"
+      "zona5 zona6"
+      "zona7 zona7"
+      "zona3 zona4"
+      "zona2 zona2"
+      "zona8 zona8"
+      "footer footer";
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-grid-mediu);
+    margin-left: var(--padding-mediu);
+    margin-right: var(--padding-mediu);
+  }
+
+  .container-iframe {
+    width: 95%;
+  }
+
+  .taburi-iframe>a {
+    width: 45%;
+    font-size: 0.9em;
+  }
+
+  /* Ajustarea dimensiunilor pentru elementele media pe ecran mediu */
+  img,
+  video,
+  iframe,
+  .container-iframe {
+    max-width: 90%;
+  }
+
+  th,
+  td {
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  /* Ajustare pentru meniul de navigare */
+  .meniu {
+    flex-direction: column;
+  }
+
+  .container-iframe>iframe {
+    height: 350px;
+  }
+
+  .zona1,
+  .zona2,
+  .zona3,
+  .zona4,
+  .zona5,
+  .zona6,
+  .zona7,
+  .zona8,
+  #zona1,
+  #zona2,
+  #zona3,
+  #zona4,
+  #zona5,
+  #zona6,
+  #zona7,
+  #zona8,
+  .header,
+  .footer {
+    padding: var(--padding-mic);
+  }
+}
+
+/* Media Query pentru ecran mic (mobil) */
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-areas:
+      "header"
+      "zona1"
+      "zona5"
+      "zona6"
+      "zona7"
+      "zona3"
+      "zona4"
+      "zona2"
+      "zona8"
+      "footer";
+    grid-template-columns: 1fr;
+    gap: var(--gap-grid-mic);
+    margin-left: var(--padding-mic);
+    margin-right: var(--padding-mic);
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  .taburi-iframe {
+    flex-direction: column;
+  }
+
+  .taburi-iframe>a {
+    width: 90%;
+    margin: 5px auto;
+  }
+
+  .container-iframe>iframe {
+    height: 300px;
+  }
+
+  
+  .table-container {
+    margin-bottom: 20px;
+  }
+
+  th,
+  td {
+    padding: 6px 8px;
+    font-size: 0.8em;
+  }
+
+  caption {
+    font-size: 0.85em;
+  }
+  
+  img,
+  video,
+  iframe,
+  .container-iframe {
+    max-width: 95%;
+    min-width: 150px;
+  }
+
+  .container-iframe {
+    min-width: 250px;
+    margin: 10px auto;
+  }
+
+  .zona1,
+  .zona2,
+  .zona3,
+  .zona4,
+  .zona5,
+  .zona6,
+  .zona7,
+  .zona8,
+  #zona1,
+  #zona2,
+  #zona3,
+  #zona4,
+  #zona5,
+  #zona6,
+  #zona7,
+  #zona8,
+  .header,
+  .footer {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  article {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  p,
+  li {
+    line-height: 1.4;
+  }
+}
+
+
+/* Animații pentru transformarea butonului hamburger */
+@keyframes rotateBar45 {
+  0% {
+      top: 0;
+      transform: rotate(0);
+  }
+  100% {
+      top: 50%;
+      transform: rotate(45deg);
+  }
+}
+
+@keyframes fadeOutBar {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes rotateBarNeg45 {
+  0% {
+      bottom: 0;
+      transform: rotate(0);
+  }
+  100% {
+      bottom: 40%;
+      transform: rotate(-45deg);
+  }
+}
+
+/* Animații pentru revenirea la starea inițială */
+@keyframes revertRotateBar45 {
+  0% {
+      top: 50%;
+      transform: rotate(45deg);
+  }
+  100% {
+      top: 0;
+      transform: rotate(0);
+  }
+}
+
+@keyframes revertFadeOutBar {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes revertRotateBarNeg45 {
+  0% {
+      bottom: 40%;
+      transform: rotate(-45deg);
+  }
+  100% {
+      bottom: 0;
+      transform: rotate(0);
+  }
+}
+
+/* Afișare meniu mobil */
+#hamburger-toggle:checked ~ nav {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-primary);
+  z-index: 999;
+  padding-top: 60px;
+}
+
+#hamburger-toggle:checked ~ nav a {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Submeniuri pe mobil */
+#hamburger-toggle:checked ~ nav ul ul {
+  position: static;
+  background-color: rgba(255,255,255,0.1);
+  display: block;
+  padding: 0;
+}
+
+/* Adaptare pentru ecrane mici și medii */
+@media (max-width: 768px) {
+  #hamburger-btn {
+      display: block;
+  }
+  
+  header > nav {
+      display: none;
+  }
+  
+  /* Animație pentru intrarea elementelor din meniu */
+  #hamburger-toggle:checked ~ nav li {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s forwards;
+  }
+  
+  /* Delay pentru animarea succesivă a elementelor */
+  #hamburger-toggle:checked ~ nav li:nth-child(1) { animation-delay: 0.1s; }
+  #hamburger-toggle:checked ~ nav li:nth-child(2) { animation-delay: 0.2s; }
+  #hamburger-toggle:checked ~ nav li:nth-child(3) { animation-delay: 0.3s; }
+  #hamburger-toggle:checked ~ nav li:nth-child(4) { animation-delay: 0.4s; }
+  
+  @keyframes fadeInUp {
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+}
+
+
+/* Reguli pentru printare */
+@media print {
+  * {
+      background-color: white !important;
+      color: black !important;
+      box-shadow: none !important;
+  }
+  
+  /* Banner în dreapta primei pagini */
+  .header {
+      position: absolute !important;
+      top: 0 !important;
+      right: 0 !important;
+      width: 40% !important;
+      border: 3px double #000 !important;
+      background-color: white !important;
+      color: black !important;
+      padding: 10px !important;
+      margin: 0 !important;
+  }
+  
+  .header h1 {
+      text-align: center !important;
+      font-size: 18pt !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      page-break-after: avoid !important;
+  }
+  
+  /* Ascunde elemente media */
+  img, video, iframe, .container-iframe, .featured-image, .sectiune-video {
+      display: none !important;
+  }
+  
+  .grid-container {
+      display: block !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+  }
+  
+  a {
+      text-decoration: none !important;
+      color: black !important;
+  }
+  
+  h1 {
+      text-align: center !important;
+      width: 100% !important;
+      font-size: 24pt !important;
+      margin-bottom: 20pt !important;
+  }
+  
+  /* Watermark cu nume */
+  body::after {
+      content: "Tanase Mara" !important;
+      position: fixed !important;
+      top: 50% !important;
+      left: 30% !important;
+      transform: translate(-50%, -50%) rotate(-45deg) !important;
+      transform-origin: center !important;
+      font-size: 48pt !important;
+      opacity: 0.3 !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+      color: #000 !important;
+  }
+  
+  /* Margini diferite pentru pagini */
+  @page:left {
+      margin-left: 2cm;
+      margin-right: 1cm;
+  }
+  
+  @page:right {
+      margin-left: 1cm;
+      margin-right: 2cm;
+  }
+  
+  /* Elementele de navigare nu se printează */
+  #hamburger-btn, .hamburger-checkbox, nav, #link-top, footer iframe {
+      display: none !important;
+  }
+  
+  /* Formatare secțiuni */
+  section {
+      page-break-before: always !important;
+      border: none !important;
+      padding: 0.5cm !important;
+      margin: 0 !important;
+      background-color: white !important;
+  }
+  
+  .zona1 {
+      page-break-before: avoid !important;
+  }
+  
+  /* Formatare tabele */
+  table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      border: 1px solid black !important;
+      margin: 10pt 0 !important;
+  }
+  
+  th, td {
+      border: 1px solid black !important;
+      padding: 5pt !important;
+      text-align: left !important;
+  }
+  
+  thead {
+      background-color: #f0f0f0 !important;
+  }
+  
+  footer {
+      margin-top: 2cm !important;
+      border-top: 1px solid black !important;
+      padding-top: 0.5cm !important;
+      font-size: 9pt !important;
+  }
+  
+  .hamburger-bar, .taburi-iframe, button {
+      display: none !important;
+  }
+  
+  /* Previne separarea elementelor pe pagini diferite */
+  h2, h3, li, tr {
+      page-break-inside: avoid !important;
+  }
+}
+
+/* Stiluri pentru header și navigare */
+.header {
+  position: relative;
+  background-color: #A6D8D4;
+  color: white;
+  padding: 15px;
+}
+.header nav {
+  margin-top: 15px;
+}
+.header nav .meniu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.header nav .meniu > li {
+  position: relative;
+  margin-right: 5px;
+}
+.header nav .meniu > li > a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: text-shadow 0.3s ease;
+  position: relative;
+}
+
+/* Animație pentru link-urile din meniu */
+.header nav .meniu > li > a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #A6D8D4;
+  transition: width 0.5s ease, left 0.5s ease;
+  transform: translateX(0);
+}
+.header nav .meniu > li > a:hover::after {
+  width: 100%;
+  left: 0;
+}
+.header nav .meniu > li > a span {
+  display: inline-block;
+  transition: letter-spacing 0.3s ease;
+}
+.header nav .meniu > li > a:hover span {
+  letter-spacing: 1px;
+}
+.header nav .meniu > li > a {
+  text-shadow: 0 -20px 15px rgba(255, 255, 255, 0); /* Umbra începe deasupra */
+  transition: text-shadow 0.3s ease;
+}
+
+.header nav .meniu > li > a:hover {
+  text-shadow: 0 5px 15px rgba(255, 255, 255, 0.5); /* Umbra "alunecă" în jos */
+}
+
+
+/* Stiluri pentru submeniuri */
+.header nav .meniu > li > ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #F7F6F2;
+  min-width: 200px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, height 0.5s ease;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.header nav .meniu > li > ul li {
+  border-bottom: 1px solid rgba(184, 178, 167, 0.2);
+}
+.header nav .meniu > li > ul li a {
+  display: block;
+  padding: 10px 15px;
+  color: #333333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.header nav .meniu > li > ul li a:hover {
+  background-color: #F6DFEB;
+  color: #333333;
+}
+.header nav .meniu > li > ul li:last-child {
+  border-bottom: none;
+}
+.header nav .meniu > li:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+  transform: scaleY(1);
+  transition: transform 0.5s ease;
+}
+
+/* Meniu hamburger pentru mobil */
+.hamburger-checkbox {
+  display: none;
+}
+
+#hamburger-btn {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+}
+
+.hamburger-bar {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.hamburger-bar:nth-child(1) {
+  top: 0;
+}
+
+.hamburger-bar:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger-bar:nth-child(3) {
+  bottom: 0;
+}
+
+/* Animații pentru meniul mobil */
+#hamburger-toggle:checked ~ #hamburger-btn .hamburger-bar:nth-child(1) {
+  animation: rotateBar45 0.5s forwards;
+  animation-delay: 0ms;
+}
+
+#hamburger-toggle:checked ~ #hamburger-btn .hamburger-bar:nth-child(2) {
+  animation: fadeOutBar 0.5s forwards;
+  animation-delay: 100ms;
+}
+
+#hamburger-toggle:checked ~ #hamburger-btn .hamburger-bar:nth-child(3) {
+  animation: rotateBarNeg45 0.5s forwards;
+  animation-delay: 200ms;
+}
+
+#hamburger-toggle:not(:checked) ~ #hamburger-btn .hamburger-bar:nth-child(1) {
+  animation: revertRotateBar45 0.5s forwards;
+  animation-delay: 200ms;
+}
+
+#hamburger-toggle:not(:checked) ~ #hamburger-btn .hamburger-bar:nth-child(2) {
+  animation: revertFadeOutBar 0.5s forwards;
+  animation-delay: 100ms;
+}
+
+#hamburger-toggle:not(:checked) ~ #hamburger-btn .hamburger-bar:nth-child(3) {
+  animation: revertRotateBarNeg45 0.5s forwards;
+  animation-delay: 0ms;
+}
+
+/* Layout pentru mobil și tablete */
+@media (max-width: 768px) {
+  #hamburger-btn {
+    display: block;
+  }
+  
+  .header nav {
+    display: none;
+  }
+  
+  .header nav.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #A6D8D4;
+    z-index: 999;
+    padding-top: 60px;
+  }
+  
+  .header nav.active .meniu {
+    flex-direction: column;
+  }
+  
+  .header nav.active .meniu > li {
+    margin-right: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+  }
+  
+  /* Animație secvențială pentru elementele din meniu */
+  .header nav.active .meniu > li:nth-child(1) { animation-delay: 0.1s; }
+  .header nav.active .meniu > li:nth-child(2) { animation-delay: 0.2s; }
+  .header nav.active .meniu > li:nth-child(3) { animation-delay: 0.3s; }
+  .header nav.active .meniu > li:nth-child(4) { animation-delay: 0.4s; }
+  .header nav.active .meniu > li:nth-child(5) { animation-delay: 0.5s; }
+  
+  .header nav.active .meniu > li > a {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .header nav.active .meniu > li > a span {
+    display: inline-block;
+    animation: letterEffect 0.3s forwards;
+    animation-delay: 0.5s;
+  }
+  
+  .header nav.active .meniu > li > ul {
+    position: static;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .header nav.active .meniu > li > ul li a {
+    padding-left: 40px;
+  }
+  
+  .header nav.active .meniu > li.show-submenu > ul {
+    display: block;
+    height: auto;
+    transform: scaleY(1);
+  }
+  
+  .header nav.active a {
+    color: white !important;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes letterEffect {
+    0% { letter-spacing: normal; transform: scaleX(0.9); }
+    50% { letter-spacing: normal; transform: scaleX(1.1); }
+    100% { letter-spacing: 2px; transform: scaleX(1); }
+  }
+  
+  #hamburger-toggle:checked ~ nav a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Ajustări pentru telefoane mobile */
+@media (max-width: 480px) {
+  #hamburger-btn {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+}
