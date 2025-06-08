@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <title>GlowEssence - Magazin de skincare</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords"
+        content="îngrijire piele,skincare, produse cosmetice, rutină de îngrijire,ten sănătos,produse naturale, frumusețe, dermato-cosmetice, hidratare, curățare ten">
+    <meta name="description"
+        content="GlowEssence - magazin online cu produse premium de skincare pentru toate tipurile de ten">
+    <meta name="author" content="Tanase Mara">
+    <link rel="icon" type="image/png" href="./resurse/imagini/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./resurse/imagini/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./resurse/imagini/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./resurse/imagini/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./resurse/imagini/favicon/site.webmanifest" />
+    <link rel="stylesheet" type="text/css" href="./RESURSE/CSS/css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Adaugă acest cod în secțiunea head a documentului HTML -->
+<style>
+    /* Stiluri pentru meniul principal și header */
+    .header {
+      position: relative;
+      background-color: #A6D8D4;
+      padding: 15px;
+    }
+    
+    /* Meniu principal */
+    .header nav .meniu {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    /* Elemente principale din meniu */
+    .header nav .meniu > li {
+      position: relative;
+      margin-right: 5px;
+    }
+    
+    /* Link-uri principale din meniu */
+    .header nav .meniu > li > a {
+      display: block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 -20px 15px rgba(255, 255, 255, 0); /* Umbra începe deasupra */
+      transition: text-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    /* Hover pe link-uri principale */
+    .header nav .meniu > li > a:hover {
+      text-shadow: 0 5px 15px rgba(255, 255, 255, 0.5); /* Umbra "alunecă" jos */
+    }
+    
+    /* Submeniu */
+    .header nav .meniu > li > ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: 
+        transform 0.5s ease,
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        height 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* Hover pe submeniu */
+    .header nav .meniu > li:hover > ul {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+      transform: scaleY(1);
+    }
+    
+    /* Elemente din submeniu */
+    .header nav .meniu > li > ul li {
+      border-bottom: 1px solid rgba(184, 178, 167, 0.2);
+    }
+    
+    /* Ultimul element din submeniu */
+    .header nav .meniu > li > ul li:last-child {
+      border-bottom: none;
+    }
+    
+    /* Link-uri din submeniu */
+    .header nav .meniu > li > ul li a {
+      display: block;
+      padding: 10px 15px;
+      color: #333333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    /* Hover pe link-uri din submeniu */
+    .header nav .meniu > li > ul li a:hover {
+      background-color: #F6DFEB;
+    }
+    
+    /* Efect de subliniere pentru link-uri principale */
+    .header nav .meniu > li > a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: white;
+      transition: width 0.5s ease, left 0.5s ease;
+      transform: translateX(0);
+    }
+    
+    /* Hover pe efect de subliniere */
+    .header nav .meniu > li > a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+    
+    /* Efect pentru litere */
+    .header nav .meniu > li > a span {
+      display: inline-block;
+      transition: letter-spacing 0.3s ease;
+    }
+    
+    /* Hover pe efect pentru litere */
+    .header nav .meniu > li > a:hover span {
+      letter-spacing: 2px;
+    }
+    
+    /* Media query pentru mobil */
+    @media (max-width: 768px) {
+      #hamburger-btn {
+        display: block;
+      }
+      
+      .header nav {
+        display: none;
+      }
+      
+      /* Când meniul mobil este deschis */
+      #hamburger-toggle:checked ~ nav {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #A6D8D4;
+        z-index: 999;
+        padding-top: 60px;
+      }
+      
+      /* Afișare meniu vertical */
+      #hamburger-toggle:checked ~ nav .meniu {
+        flex-direction: column;
+      }
+      
+      /* Elemente din meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li {
+        margin-right: 0;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s forwards;
+      }
+      
+      /* Delay pentru animații */
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(1) { animation-delay: 0.1s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(2) { animation-delay: 0.2s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(3) { animation-delay: 0.3s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(4) { animation-delay: 0.4s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(5) { animation-delay: 0.5s; }
+      
+      /* Link-uri în meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li > a {
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Animație pentru litere în meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li > a span {
+        display: inline-block;
+        animation: letterEffect 0.3s forwards;
+        animation-delay: 0.5s;
+      }
+      
+      /* Submeniuri în meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li > ul {
+        position: static;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: none;
+        height: auto;
+        visibility: visible;
+        opacity: 1;
+        display: none;
+      }
+      
+      /* Submeniuri deschise în meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li.show-submenu > ul {
+        display: block;
+      }
+      
+      /* Link-uri în submeniurile din meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li > ul li a {
+        padding-left: 40px;
+        color: white;
+      }
+      
+      /* Keyframes pentru animații */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes letterEffect {
+        0% { letter-spacing: -1px; transform: scaleX(0.9); }
+        50% { letter-spacing: 3px; transform: scaleX(1.1); }
+        100% { letter-spacing: 2px; transform: scaleX(1); }
+      }
+    }
+    </style>
+</head>
+
+<body>
+    <div id="link-top">
+        <a href="#"><span id="triunghi">&#129081;</span></a>
+    </div>
+
+    <div class="grid-container">
+        <header class="header">
+            <h1>GlowEssence<i class="fa-solid fa-star"></i></h1>
+            
+            
+            <input type="checkbox" id="hamburger-toggle" class="hamburger-checkbox">
+            <label for="hamburger-toggle" id="hamburger-btn" aria-label="Meniu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </label>
+            
+            <nav>
+                <ul class="meniu">
+                    <li><a href="#acasa"><span>Acasă</span></a></li>
+                    
+                    
+                    <li class="has-submenu">
+                        <input type="checkbox" id="toggle-produse" class="submenu-checkbox">
+                        <label for="toggle-produse" class="submenu-toggle"><span>Produse</span></label>
+                        <ul class="submenu">
+                            <li><a href="#curatare">Produse de curățare</a></li>
+                            <li><a href="#tonere">Tonere și esențe</a></li>
+                            <li><a href="#seruri">Seruri</a></li>
+                            <li><a href="#hidratare">Hidratare</a></li>
+                            <li><a href="#masti">Măști faciale</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#oferte"><span>Oferte</span></a></li>
+                    
+                    
+                    <li class="has-submenu">
+                        <input type="checkbox" id="toggle-cont" class="submenu-checkbox">
+                        <label for="toggle-cont" class="submenu-toggle"><span>Contul meu</span></label>
+                        <ul class="submenu">
+                            <li><a href="#contul_meu">Intră în cont</a></li>
+                            <li><a href="#cos_cumparaturi">Coș de cumpărături <i class="fa-solid fa-cart-shopping fa-shake"></i></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <main>
+            
+            <section class="zona1" id="prezentare">
+                <div class="f-pattern">
+                    <div class="header-line">
+                        <h2>Descoperă secretul unui ten perfect</h2>
+                    </div>
+                    <div class="primary-content">
+                        <div class="text-column">
+                            <p>Bine ai venit la <strong>GlowEssence</strong>, destinația ta pentru o piele sănătoasă și strălucitoare. Oferim produse premium pentru îngrijirea personalizată a tenului tău, create cu ingrediente naturale și formule inovatoare.</p>
+                            <p>La GlowEssence, credem că fiecare tip de ten are nevoie de atenție specială. De aceea, portofoliul nostru include produse adaptate pentru toate tipurile de piele și pentru diverse nevoi:</p>
+                        </div>
+                        <div class="featured-image">
+                            <img src="./resurse/imagini/oil-large.jpg" alt="Produse GlowEssence" width="300">
+                        </div>
+                    </div>
+                    <div class="scan-line">
+                        <h3>De ce să alegi GlowEssence?</h3>
+                        <ul>
+                            <li>Ingrediente naturale premium</li>
+                            <li>Formule dezvoltate de experți dermatologi</li>
+                            <li>Produse testate dermatologic</li>
+                            <li>Fără parabeni, sulfați sau ingrediente nocive</li>
+                        </ul>
+                    </div>
+                    <div class="final-line">
+                        <p>Descoperă diferența GlowEssence și lasă-ți pielea să strălucească natural!</p>
+                        <a href="#produse" class="cta-button">Explorează produsele noastre</a>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="zona2" id="produse-populare">
+                <h2>Produse populare</h2>
+                <div class="table-container">
+                    <table>
+                        <caption>Cele mai populare produse GlowEssence în 2025</caption>
+                        <thead>
+                            <tr>
+                                <th>Produs</th>
+                                <th>Descriere</th>
+                                <th>Preț</th>
+                                <th>Rating</th>
+                                <th>Disponibilitate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ser cu Vitamina C</td>
+                                <td>Ser puternic pentru luminozitate și reducerea petelor pigmentare</td>
+                                <td class="pret">96 lei</td>
+                                <td>4.8/5 (256 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                            <tr>
+                                <td>Cremă hidratantă</td>
+                                <td>Hidratare intensă de lungă durată, fără să încarce tenul</td>
+                                <td class="pret">60 lei</td>
+                                <td>4.6/5 (189 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                            <tr class="important">
+                                <td>Ulei de curățare Beauty of Joseon</td>
+                                <td>Curăță în profunzime, lasă pielea hidratată și elimină punctele negre</td>
+                                <td class="pret">130 lei</td>
+                                <td>4.9/5 (320 recenzii)</td>
+                                <td>Stoc limitat</td>
+                            </tr>
+                            <tr>
+                                <td>Mască de față cu argilă</td>
+                                <td>Purifică porii și echilibrează sebumul</td>
+                                <td class="pret">45 lei</td>
+                                <td>4.5/5 (134 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                            <tr>
+                                <td>Toner cu acid hialuronic</td>
+                                <td>Hidratează și pregătește pielea pentru absorbția serurilor</td>
+                                <td class="pret">78 lei</td>
+                                <td>4.7/5 (201 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">Total produse în catalog</td>
+                                <td colspan="3">Peste 120 produse premium pentru îngrijirea pielii</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            
+            <section class="zona3" id="calendar">
+                <h2>Calendar evenimente</h2>
+                <p>Aici va fi afișat calendarul de evenimente viitoare organizate de GlowEssence.</p>
+                <div class="calendar-placeholder">
+                    <p>Evenimentele includ:</p>
+                    <ul>
+                        <li>Workshop-uri de îngrijire a pielii</li>
+                        <li>Lansări de produse noi</li>
+                        <li>Sesiuni demonstrative cu experți</li>
+                        <li>Promoții speciale</li>
+                    </ul>
+                </div>
+            </section>
+
+            
+            <section class="zona4" id="anunturi">
+                <h2>Anunțuri importante</h2>
+                <div class="anunturi-placeholder">
+                    <p>Aici vor fi afișate anunțurile și notificările importante pentru utilizatori.</p>
+                    <div class="anunt-exemplu">
+                        <h3>Exemplu de anunț:</h3>
+                        <p>Program special de Paște: Magazinul online va fi închis în perioada 15-18 aprilie. Comenzile plasate în această perioadă vor fi procesate începând cu 19 aprilie.</p>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="zona5" id="utilizatori">
+                <h2>Utilizatori online</h2>
+                <div class="utilizatori-placeholder">
+                    <p>Aici va fi afișată lista utilizatorilor activi pe site.</p>
+                    <p>Număr total de utilizatori online: 42</p>
+                </div>
+            </section>
+
+            
+            <section class="zona6" id="statistici">
+                <h2>Statistici utilizator</h2>
+                <div class="statistici-placeholder">
+                    <p>Aici vor fi afișate statisticile tale de utilizare și informații despre contul tău.</p>
+                    <div class="stats-ejemplu">
+                        <p>Exemple de statistici:</p>
+                        <ul>
+                            <li>Număr de comenzi plasate</li>
+                            <li>Produse favorite</li>
+                            <li>Timpul petrecut pe site</li>
+                            <li>Economii realizate prin promoții</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="zona7" id="server-info">
+                <h2>Informații server</h2>
+                <div class="server-placeholder">
+                    <p>Aici vor fi afișate informații despre performanța site-ului și a serverului.</p>
+                    <div class="server-stats">
+                        <p>Exemple de date:</p>
+                        <ul>
+                            <li>Timp de încărcare</li>
+                            <li>Status server</li>
+                            <li>Ultima actualizare</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="zona8" id="continut-divers">
+                <h2>Conținut util</h2>
+                
+                
+                <div class="intrebari-frecvente">
+                    <h3>Întrebări frecvente</h3>
+                    <details>
+                        <summary><q>Cum aleg produsele potrivite pentru tipul meu de ten?</q></summary>
+                        <p>Pentru a alege produsele potrivite, este important să îți cunoști tipul de ten (uscat, gras, mixt sau normal). Pe site-ul nostru, poți găsi recomandări specifice pentru fiecare tip de ten.</p>
+                    </details>
+                    <details>
+                        <summary><q>Cât durează livrarea produselor?</q></summary>
+                        <p>Livrarea produselor se face în 1-3 zile lucrătoare pe teritoriul României.</p>
+                    </details>
+                </div>
+                
+                
+                <div class="sectiune-video">
+                    <h3>Video-uri demonstrative</h3>
+                    <div class="container-iframe">
+                        <div class="taburi-iframe">
+                            <a href="https://www.youtube.com/embed/RbdGxDP5Tvs?si=URPXuc89R6t5yco-" target="ifr-video">Cele mai bune uleiuri de curățare</a>
+                            <a href="https://www.youtube.com/embed/WTNT2uGBjhQ?si=LWneQdhIdL_JVc1-" target="ifr-video">Tipuri de măști faciale</a>
+                            <a href="https://www.youtube.com/embed/Ss5jrHNk0iI?si=ith9RoYIbvw6X_ia" target="ifr-video">Creme hidratante</a>
+                        </div>
+                        <iframe name="ifr-video" width="560" height="315"
+                            src="https://www.youtube.com/embed/RbdGxDP5Tvs?si=URPXuc89R6t5yco-" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <address>
+                <p>Telefon: <a href="tel:+40123456789">+40 123 456 789</a></p>
+                <p>Adresă: <a href="https://maps.google.com/?q=Facultatea+de+Matematica+si+Informatica+Bucuresti">Str.
+                        Academiei nr. 14, București</a></p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.885629334555!2d26.10050682674782!3d44.43522577107288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83%2C%20Universitatea%20din%20Bucure%C8%99ti!5e0!3m2!1sro!2sro!4v1709929271953!5m2!1sro!2sro"
+                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <p>Email: <a href="mailto:contact@glowessence.ro">contact@glowessence.ro</a></p>
+                <p>Chat: <a href="https://whatsapp.com">WhatsApp</a></p>
+            </address>
+            <p><small>&copy; 2025 GlowEssence. Toate drepturile rezervate.</small></p>
+            <p><small>Creat la <time datetime="2025-03-08">8 Martie 2025</time></small></p>
+        </footer>
+    </div>
+</body>
+</html>
