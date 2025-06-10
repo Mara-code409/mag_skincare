@@ -1,0 +1,169 @@
+/* ===================================================================== */
+/* STILIZARE-LINKURI - TOATE CERINȚELE IMPLEMENTATE */
+/* ===================================================================== */
+
+/* Variabilă CSS pentru culoarea linkurilor vizitate */
+:root {
+    --color-link-visited: var(--color-secondary);
+    --color-link-active: var(--color-primary);
+}
+
+/* ===================================================================== */
+/* CERINȚA 1: Linkurile vizitate au culoare diferită */
+/* ===================================================================== */
+main a:visited {
+    color: var(--color-link-visited) !important;
+}
+
+/* ===================================================================== */
+/* CERINȚA 2: Linkurile externe cu simbolul ⮳ */
+/* Selector: a[href^="http"] - linkuri care încep cu "http" */
+/* ===================================================================== */
+main a[href^="http"]::before,
+main a[href^="https"]::before {
+    content: "⮳";  /* Simbolul corect conform cerințelor */
+    font-size: 1.5em;  /* 50% mai mare față de fontul linkului */
+    margin-right: 0.3em;
+    display: inline-block;
+    transition: color 0.3s ease;
+    color: var(--color-primary);
+}
+
+/* ===================================================================== */
+/* CERINȚA 3: La hover pe link extern, simbolul își schimbă culoarea */
+/* ===================================================================== */
+main a[href^="http"]:hover::before,
+main a[href^="https"]:hover::before {
+    color: #b05c7f !important;
+}
+
+/* ===================================================================== */
+/* CERINȚA 4: Gradient radial care crește din centru la hover */
+/* Doar pentru linkurile din conținutul paginii (main) */
+/* ===================================================================== */
+main a:not([href^="#"]):not(.no-gradient) {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    
+    /* Background gradient radial conform cerințelor exacte */
+    background-image: radial-gradient(
+        circle at center,
+        var(--color-primary) 0%,      /* Culoarea c1 la 0% */
+        var(--color-primary) 40%,     /* Culoarea c1 la 40% */
+        transparent 80%,              /* Transparent la 80% */
+        transparent 100%              /* Transparent la 100% */
+    );
+    
+    /* Poziționare și dimensiune conform cerințelor */
+    background-position: center;      /* Poziționat centrat */
+    background-size: 0% 0%;          /* Dimensiune 0 inițial */
+    background-repeat: no-repeat;
+    
+    /* Tranziție pentru efectul de creștere */
+    transition: background-size 0.4s ease;
+}
+
+/* ===================================================================== */
+/* CERINȚA 4: La hover, pata de culoare crește la 100% */
+/* ===================================================================== */
+main a:not([href^="#"]):not(.no-gradient):hover {
+    background-size: 100% 100%;      /* Crește la 100% la hover */
+}
+
+/* ===================================================================== */
+/* CERINȚA 5: Border la click (:active) */
+/* ===================================================================== */
+main a:active {
+    border: 2px solid var(--color-link-active) !important;
+    border-radius: 4px;
+    padding: 2px 4px;
+    outline: none;
+    box-shadow: 0 0 5px rgba(166, 216, 212, 0.5);
+}
+
+/* ===================================================================== */
+/* EXCLUDERI IMPORTANTE - Nu afectăm meniul și alte elemente */
+/* ===================================================================== */
+
+/* Linkurile din header/nav rămân neschimbate */
+header a,
+nav a,
+.header a,
+.meniu a {
+    background-image: none !important;
+    background: none !important;
+}
+
+/* Linkurile din footer rămân neschimbate */
+footer a {
+    background-image: none !important;
+}
+
+/* Link-ul "du-mă sus" rămâne neschimbat */
+#link-top a {
+    background-image: none !important;
+}
+
+/* Linkurile din taburi iframe nu au gradient */
+.taburi-iframe a {
+    background-image: none !important;
+}
+
+/* ===================================================================== */
+/* STILURI SPECIALE PENTRU DIFERITE TIPURI DE LINKURI */
+/* ===================================================================== */
+
+/* Linkurile din tabel - păstrează gradientul dar cu culori adaptate */
+.table-container a {
+    color: var(--color-primary);
+}
+
+.table-container a:hover {
+    color: var(--color-text);
+}
+
+/* Linkurile CTA (call-to-action) - design special */
+.cta-button {
+    background-image: none !important;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(166, 216, 212, 0.4);
+    background-size: auto !important;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(166, 216, 212, 0.6);
+}
+
+/* ===================================================================== */
+/* RESPONSIVE: Ajustări pentru ecrane mici */
+/* ===================================================================== */
+@media (max-width: 768px) {
+    main a[href^="http"]::before,
+    main a[href^="https"]::before {
+        font-size: 1.3em;
+        margin-right: 0.2em;
+    }
+    
+    main a:active {
+        border-width: 1px !important;
+        padding: 1px 2px;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}

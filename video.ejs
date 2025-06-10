@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <%- include("../fragmente/head") %>
+    <title>Îngrijirea Tenului | GlowEssence</title>
+    <style>
+        .video-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        
+        /* ===================================================================== */
+        /* CERINȚA VIDEO-VTT 1: Videoclip responsiv cu dimensiuni controlate */
+        /* ===================================================================== */
+        video {
+            width: 100%; /* Lățime în procentaje pentru responsivitate */
+            min-width: 320px; /* Lățime minimă pentru ecrane mici */
+            max-width: 800px; /* Lățime maximă pentru ecrane mari */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            background-color: #000; /* Fundal negru pentru video */
+        }
+        
+        .video-text {
+            margin-top: 1.5rem;
+        }
+        
+        .video-description {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--color-highlight);
+            border-radius: 10px;
+        }
+        
+        /* ===================================================================== */
+        /* CERINȚA VIDEO-VTT 5: Stilizare pentru textul VTT */
+        /* ===================================================================== */
+        
+        /* Stiluri pentru toate subtitle-urile VTT */
+        video::cue {
+            background-color: rgba(255, 255, 255, 0.3); /* Background alb cu transparența 0.3 */
+            color: var(--color-text); /* Culoare închisă conform schemei cromatice */
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        /* Stiluri speciale pentru primul text (intro) */
+        video::cue(.intro) {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #333333;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            /* Centrarea pe orizontală și verticală se face prin WebVTT settings */
+        }
+        
+        /* Stiluri pentru subtitle-urile normale */
+        video::cue(.subtitle) {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #333333;
+            font-size: 16px;
+        }
+
+        .produse-recomandate {
+            margin-top: 2rem;
+        }
+
+        .produse-recomandate h3 {
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .produse-recomandate ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .produse-recomandate li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .produse-recomandate li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+        
+        /* Responsive pentru video pe ecrane foarte mici */
+        @media (max-width: 480px) {
+            video {
+                min-width: 280px;
+            }
+            
+            video::cue(.intro) {
+                font-size: 18px;
+            }
+            
+            video::cue(.subtitle) {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="link-top">
+        <a href="#"><span id="triunghi">&#129081;</span></a>
+    </div>
+
+    <div class="grid-container">
+        <%- include("../fragmente/header") %>
+        
+        <main>
+            <section class="zona1" id="video-section">
+                <h2>Rutina mea zilnică de îngrijire a tenului</h2>
+                
+                <div class="video-container">
+                    <!-- ============================================================= -->
+                    <!-- IMPLEMENTAREA TUTUROR CERINȚELOR VIDEO-VTT -->
+                    <!-- ============================================================= -->
+                    <video 
+                        id="tutorial-video" 
+                        controls 
+                        poster="/video/poster.jpg" 
+                        preload="metadata"
+                        width="100%">
+                        
+                        <!-- CERINȚA VIDEO-VTT 4: Minimum 2 surse în formate diferite -->
+                        <source src="/video/tutorial.mp4" type="video/mp4">
+                        <source src="/video/tutorial.webm" type="video/webm">
+                        
+                        <!-- CERINȚA VIDEO-VTT 2: Minimum 2 trackuri în limbi diferite -->
+                        <!-- Track română (default) -->
+                        <track 
+                            label="Română" 
+                            kind="subtitles" 
+                            srclang="ro" 
+                            src="/video/subtitles-ro.vtt" 
+                            default>
+                        
+                        <!-- Track engleză -->
+                        <track 
+                            label="English" 
+                            kind="subtitles" 
+                            srclang="en" 
+                            src="/video/subtitles-en.vtt">
+                        
+                        <!-- Mesaj pentru browsere care nu suportă video -->
+                        <p>Browserul dumneavoastră nu suportă redarea videoclipurilor.</p>
+                    </video>
+                    
+                    <div class="video-text">
+                        <h3>Opinie sinceră despre produsele CeraVe</h3>
+                        <p>În acest tutorial, vă prezint rutina mea zilnică de îngrijire a tenului și experiența mea cu produsele CeraVe. Veți descoperi cum mă demachiez, cum îmi curăț tenul și ce produse folosesc pentru hidratare.</p>
+                    </div>
+                </div>
+                
+                <div class="video-description">
+                    <h3>Pașii din rutina mea de îngrijire</h3>
+                    <ol>
+                        <li><strong>Demachiere</strong> - Primul și cel mai important pas pentru a elimina machiajul și impuritățile.</li>
+                        <li><strong>Curățare</strong> - Folosesc un gel de curățare blând care nu usucă pielea.</li>
+                        <li><strong>Tonifiere</strong> - Aplic un toner pentru a echilibra pH-ul pielii.</li>
+                        <li><strong>Seruri active</strong> - În funcție de nevoile tenului meu, aplic diverse seruri concentrate.</li>
+                        <li><strong>Hidratare</strong> - Cremă hidratantă adaptată tipului meu de ten.</li>
+                        <li><strong>Protecție solară</strong> - Esențială în fiecare zi, chiar și când e înnorat.</li>
+                    </ol>
+                </div>
+
+                <div class="produse-recomandate">
+                    <h3>Produsele mele favorite CeraVe</h3>
+                    <ul>
+                        <li>CeraVe Hydrating Cleanser - perfect pentru ten normal spre uscat</li>
+                        <li>CeraVe Foaming Facial Cleanser - excelent pentru ten gras spre mixt</li>
+                        <li>CeraVe Moisturizing Cream - hidratare intensă pentru ten uscat</li>
+                        <li>CeraVe PM Facial Moisturizing Lotion - pentru hidratare pe timpul nopții</li>
+                        <li>CeraVe Eye Repair Cream - pentru zona delicată din jurul ochilor</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <%- include("../fragmente/footer") %>
+    </div>
+
+    <script>
+        // Script pentru a rezolva problema posterului care rămâne vizibil
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('tutorial-video');
+            
+            // Ascultă evenimentul de play
+            video.addEventListener('play', function() {
+                // Asigură-te că posterul dispare când începe redarea
+                this.setAttribute('poster', '');
+            });
+            
+            // Ascultă evenimentul de ended (când se termină videoclipul)
+            video.addEventListener('ended', function() {
+                // Restaurează posterul când se termină videoclipul
+                this.setAttribute('poster', '/video/poster.jpg');
+            });
+            
+            // Script pentru debugging VTT tracks
+            video.addEventListener('loadedmetadata', function() {
+                console.log('Video metadata încărcat');
+                console.log('Numărul de track-uri text:', this.textTracks.length);
+                
+                // Listează toate track-urile
+                for (let i = 0; i < this.textTracks.length; i++) {
+                    const track = this.textTracks[i];
+                    console.log(`Track ${i}: ${track.label} (${track.language}) - ${track.kind}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

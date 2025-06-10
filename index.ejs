@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <title>GlowEssence - Magazin de skincare</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords"
+        content="îngrijire piele,skincare, produse cosmetice, rutină de îngrijire,ten sănătos,produse naturale, frumusețe, dermato-cosmetice, hidratare, curățare ten">
+    <meta name="description"
+        content="GlowEssence - magazin online cu produse premium de skincare pentru toate tipurile de ten">
+    <meta name="author" content="Tanase Mara">
+    <link rel="icon" type="image/png" href="/imagini/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/imagini/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/imagini/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/imagini/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/imagini/favicon/site.webmanifest" />
+    <link rel="stylesheet" type="text/css" href="/css/css.css">
+    <link rel="stylesheet" type="text/css" href="/css/galerie.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="link-top">
+        <a href="#"><span id="triunghi">&#129081;</span></a>
+    </div>
+
+    <div class="grid-container">
+        <%- include('../fragmente/header') %>
+
+        <main>
+            <section class="zona1" id="prezentare">
+                <div class="f-pattern">
+                    <div class="header-line">
+                        <h2>Descoperă secretul unui ten perfect</h2>
+                    </div>
+                    <div class="primary-content">
+                        <div class="text-column">
+                            <p>Bine ai venit la <strong>GlowEssence</strong>, destinația ta pentru o piele sănătoasă și strălucitoare. Oferim produse premium pentru îngrijirea personalizată a tenului tău, create cu ingrediente naturale și formule inovatoare.</p>
+                            <p>La GlowEssence, credem că fiecare tip de ten are nevoie de atenție specială. De aceea, portofoliul nostru include produse adaptate pentru toate tipurile de piele și pentru diverse nevoi:</p>
+                        </div>
+                        <div class="featured-image">
+                            <img src="/imagini/oil-large.jpg" alt="Produse GlowEssence" width="300">
+                        </div>
+                    </div>
+                    <div class="scan-line">
+                        <h3>De ce să alegi GlowEssence?</h3>
+                        <ul>
+                            <li>Ingrediente naturale premium</li>
+                            <li>Formule dezvoltate de experți dermatologi</li>
+                            <li>Produse testate dermatologic</li>
+                            <li>Fără parabeni, sulfați sau ingrediente nocive</li>
+                        </ul>
+                    </div>
+                    <div class="final-line">
+                        <p>Descoperă diferența GlowEssence și lasă-ți pielea să strălucească natural!</p>
+                        <a href="#produse" class="cta-button">Explorează produsele noastre</a>
+                    </div>
+                </div>
+            </section>
+
+           <% if (typeof imaginiGalerie !== 'undefined' && imaginiGalerie.length > 0) { %>
+            <section class="galerie-statica" style="grid-column: 1 / -1; margin: 2rem 0;">
+                <h2>Galeria noastră de produse</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <% imaginiGalerie.forEach((imagine, index) => { %>
+                        <figure style="margin: 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <img src="<%= imagine.cale_completa %>"
+                                alt="<%= imagine.alt %>"
+                                style="width: 100%; height: 200px; object-fit: cover; transition: filter 1.1s ease;"
+                                onmouseover="this.style.filter='contrast(200%)'"
+                                onmouseout="this.style.filter='contrast(100%)'">
+                            
+                            <figcaption style="padding: 1rem; font-size: 0.9rem; transition: transform 1.1s ease;"
+                                    onmouseover="this.style.transform='scale(1.1)'"
+                                    onmouseout="this.style.transform='scale(1)'">
+                                <%= imagine.text_descriere %>
+                            </figcaption>
+                        </figure>
+                    <% }); %>
+                </div>
+            </section>
+            <% } %>
+
+            <section class="zona2" id="produse-populare">
+                <h2>Produse populare</h2>
+                <div class="table-container">
+                    <table>
+                        <caption>Cele mai populare produse GlowEssence în 2025</caption>
+                        <thead>
+                            <tr>
+                                <th>Produs</th>
+                                <th>Descriere</th>
+                                <th>Preț</th>
+                                <th>Rating</th>
+                                <th>Disponibilitate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ser cu Vitamina C</td>
+                                <td>Ser puternic pentru luminozitate și reducerea petelor pigmentare</td>
+                                <td class="pret">96 lei</td>
+                                <td>4.8/5 (256 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                            <tr>
+                                <td>Cremă hidratantă</td>
+                                <td>Hidratare intensă de lungă durată, fără să încarce tenul</td>
+                                <td class="pret">60 lei</td>
+                                <td>4.6/5 (189 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                            <tr class="important">
+                                <td>Ulei de curățare Beauty of Joseon</td>
+                                <td>Curăță în profunzime, lasă pielea hidratată și elimină punctele negre</td>
+                                <td class="pret">130 lei</td>
+                                <td>4.9/5 (320 recenzii)</td>
+                                <td>Stoc limitat</td>
+                            </tr>
+                            <tr>
+                                <td>Mască de față cu argilă</td>
+                                <td>Purifică porii și echilibrează sebumul</td>
+                                <td class="pret">45 lei</td>
+                                <td>4.5/5 (134 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                            <tr>
+                                <td>Toner cu acid hialuronic</td>
+                                <td>Hidratează și pregătește pielea pentru absorbția serurilor</td>
+                                <td class="pret">78 lei</td>
+                                <td>4.7/5 (201 recenzii)</td>
+                                <td>În stoc</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">Total produse în catalog</td>
+                                <td colspan="3">Peste 120 produse premium pentru îngrijirea pielii</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section class="zona3" id="calendar">
+                <h2>Calendar evenimente</h2>
+                <p>Aici va fi afișat calendarul de evenimente viitoare organizate de GlowEssence.</p>
+                <div class="calendar-placeholder">
+                    <p>Evenimentele includ:</p>
+                    <ul>
+                        <li>Workshop-uri de îngrijire a pielii</li>
+                        <li>Lansări de produse noi</li>
+                        <li>Sesiuni demonstrative cu experți</li>
+                        <li>Promoții speciale</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="zona4" id="anunturi">
+                <h2>Anunțuri importante</h2>
+                <div class="anunturi-placeholder">
+                    <p>Aici vor fi afișate anunțurile și notificările importante pentru utilizatori.</p>
+                    <div class="anunt-exemplu">
+                        <h3>Exemplu de anunț:</h3>
+                        <p>Program special de Paște: Magazinul online va fi închis în perioada 15-18 aprilie. Comenzile plasate în această perioadă vor fi procesate începând cu 19 aprilie.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="zona5" id="utilizatori">
+                <h2>Utilizatori online</h2>
+                <div class="utilizatori-placeholder">
+                    <p>Aici va fi afișată lista utilizatorilor activi pe site.</p>
+                    <p>Număr total de utilizatori online: 42</p>
+                </div>
+            </section>
+
+            <section class="zona6" id="statistici">
+                <h2>Statistici utilizator</h2>
+                <div class="statistici-placeholder">
+                    <p>Aici vor fi afișate statisticile tale de utilizare și informații despre contul tău.</p>
+                    <div class="stats-ejemplu">
+                        <p>Exemple de statistici:</p>
+                        <ul>
+                            <li>Număr de comenzi plasate</li>
+                            <li>Produse favorite</li>
+                            <li>Timpul petrecut pe site</li>
+                            <li>Economii realizate prin promoții</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="zona7" id="server-info">
+                <h2>Informații server</h2>
+                <div class="server-placeholder">
+                    <p>Aici vor fi afișate informații despre performanța site-ului și a serverului.</p>
+                    <div class="server-stats">
+                        <p>Exemple de date:</p>
+                        <ul>
+                            <li>Timp de încărcare</li>
+                            <li>Status server</li>
+                            <li>Ultima actualizare</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="zona8" id="continut-divers">
+                <h2>Conținut util</h2>
+                
+                <div class="intrebari-frecvente">
+                    <h3>Întrebări frecvente</h3>
+                    <details>
+                        <summary><q>Cum aleg produsele potrivite pentru tipul meu de ten?</q></summary>
+                        <p>Pentru a alege produsele potrivite, este important să îți cunoști tipul de ten (uscat, gras, mixt sau normal). Pe site-ul nostru, poți găsi recomandări specifice pentru fiecare tip de ten.</p>
+                    </details>
+                    <details>
+                        <summary><q>Cât durează livrarea produselor?</q></summary>
+                        <p>Livrarea produselor se face în 1-3 zile lucrătoare pe teritoriul României.</p>
+                    </details>
+                </div>
+                
+                <div class="sectiune-video">
+                    <h3>Video-uri demonstrative</h3>
+                    <div class="container-iframe">
+                        <div class="taburi-iframe">
+                            <a href="https://www.youtube.com/embed/RbdGxDP5Tvs?si=URPXuc89R6t5yco-" target="ifr-video">Cele mai bune uleiuri de curățare</a>
+                            <a href="https://www.youtube.com/embed/WTNT2uGBjhQ?si=LWneQdhIdL_JVc1-" target="ifr-video">Tipuri de măști faciale</a>
+                            <a href="https://www.youtube.com/embed/Ss5jrHNk0iI?si=ith9RoYIbvw6X_ia" target="ifr-video">Creme hidratante</a>
+                        </div>
+                        <iframe name="ifr-video" width="560" height="315"
+                            src="https://www.youtube.com/embed/RbdGxDP5Tvs?si=URPXuc89R6t5yco-" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <%- include('../fragmente/footer') %>
+    </div>
+
+    <script>
+        // Script pentru lazy loading și efecte galerie
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy loading pentru imaginile din galerie
+            const images = document.querySelectorAll('.galerie-item img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                images.forEach(img => imageObserver.observe(img));
+            } else {
+                // Fallback pentru browsere mai vechi
+                images.forEach(img => img.classList.add('loaded'));
+            }
+
+            // Smooth scroll pentru link-ul "dus sus"
+            const linkTop = document.querySelector('#link-top a');
+            if (linkTop) {
+                linkTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Efect de parallax pentru galerie (opțional)
+            const galerieItems = document.querySelectorAll('.galerie-item');
+            if (galerieItems.length > 0) {
+                const handleScroll = () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.5;
+                    
+                    galerieItems.forEach((item, index) => {
+                        const offset = index * 0.1;
+                        item.style.transform = `translateY(${rate * offset}px)`;
+                    });
+                };
+
+                // Throttle scroll event pentru performanță
+                let ticking = false;
+                const scrollListener = () => {
+                    if (!ticking) {
+                        requestAnimationFrame(handleScroll);
+                        ticking = true;
+                        setTimeout(() => { ticking = false; }, 16);
+                    }
+                };
+
+                window.addEventListener('scroll', scrollListener);
+            }
+        });
+    </script>
+</body>
+</html>

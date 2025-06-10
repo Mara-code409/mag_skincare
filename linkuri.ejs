@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <%- include("../fragmente/head") %>
+    <title>Resurse de Skincare | GlowEssence</title>
+    <style>
+        .resources-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .resource-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .resource-section:last-child {
+            border-bottom: none;
+        }
+        
+        .resource-list {
+            margin-top: 1.5rem;
+        }
+        
+        /* 1. Link-uri vizitate cu culoare diferită */
+        .resource-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            position: relative;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-link:visited {
+            color: var(--color-secondary);
+        }
+        
+        /* 2. Link-uri externe cu pseudoelement ::before */
+        .external-link {
+            padding-left: 1.5em;
+            position: relative;
+        }
+        
+        .external-link::before {
+            content: "_";
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+        
+        /* 3. Schimbare culoare la hover */
+        .resource-link:hover {
+            color: #b05c7f;
+        }
+        
+        /* 4. Background gradient la hover */
+        .product-link {
+            display: inline-block;
+            position: relative;
+            padding: 0.5rem 1rem;
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .product-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(246, 223, 235, 0.4) 40%, 
+                rgba(166, 216, 212, 0.8) 80%, 
+                rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+            transition: width 0.5s ease;
+            background-position: center;
+            background-size: 100% 100%;
+        }
+        
+        .product-link:hover::before {
+            width: 100%;
+        }
+        
+        /* 5. Border la click */
+        .resource-link:active {
+            border: 2px solid var(--color-primary);
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .resource-description {
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div id="link-top">
+        <a href="#"><span id="triunghi">&#129081;</span></a>
+    </div>
+
+    <div class="grid-container">
+        <%- include("../fragmente/header") %>
+        
+        <main>
+            <section class="zona1" id="skincare-resources">
+                <h2>Resurse utile despre skincare</h2>
+                
+                <div class="resources-container">
+                    <div class="resource-section">
+                        <h3>Ghiduri și articole</h3>
+                        <p>Am selectat câteva resurse excelente despre îngrijirea pielii de la publicații de încredere.</p>
+                        
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <div class="resource-title">Good Housekeeping: Cele mai bune produse pentru îngrijirea pielii</div>
+                                <div class="resource-description">Un ghid complet cu cele mai bune produse pentru anti-aging și îngrijirea tenului testate de experți.</div>
+                                <a href="https://www.goodhousekeeping.com/beauty/anti-aging/g28135730/best-skincare-products/" class="resource-link external-link">Citește articolul complet</a>
+                            </div>
+                            
+                            <div class="resource-item">
+                                <div class="resource-title">Vogue: Cele mai bune produse pentru îngrijirea pielii</div>
+                                <div class="resource-description">O selecție a produselor premium pentru îngrijirea pielii, recomandate de dermatologi și experți în frumusețe.</div>
+                                <a href="https://www.vogue.com/article/best-skin-care-products" class="resource-link external-link">Descoperă selecția Vogue</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-section">
+                        <h3>Magazine online</h3>
+                        <p>Iată câteva magazine online de încredere unde poți găsi produse de calitate pentru îngrijirea tenului.</p>
+                        
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <div class="resource-title">Sephora: Colecția de skincare</div>
+                                <div class="resource-description">Unul dintre cele mai mari retaileri de produse de frumusețe, cu o selecție impresionantă de produse pentru îngrijirea pielii.</div>
+                                <a href="https://www.sephora.com/shop/skincare" class="resource-link external-link">Vizitează magazinul</a>
+                            </div>
+                            
+                            <div class="resource-item">
+                                <div class="resource-title">Notino: Produse pentru îngrijirea tenului</div>
+                                <div class="resource-description">Retailer online cu livrare rapidă și o gamă variată de produse cosmetice și de îngrijire.</div>
+                                <a href="https://www.notino.ro/" class="resource-link external-link">Explorează Notino</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-section">
+                        <h3>Produse recomandate</h3>
+                        <p>Iată câteva produse pe care le recomandăm pentru o rutină completă de îngrijire a tenului:</p>
+                        
+                        <div class="resource-list">
+                            <a href="https://www.notino.ro/venira/facial-cleansing-foam-spuma-de-curatare/" class="product-link resource-link">Venira Facial Cleansing Foam | Spumă de curățare delicată</a>
+                            
+                            <a href="https://www.notino.ro/cerave/hydrating-cleanser-gel-de-curatare-pentru-ten-uscat-si-normal/" class="product-link resource-link">CeraVe Hydrating Cleanser | Gel de curățare pentru ten uscat și normal</a>
+                            
+                            <a href="https://www.notino.ro/the-ordinary/hyaluronic-acid-2-b5-ser-hidratant-intensiv/" class="product-link resource-link">The Ordinary Hyaluronic Acid 2% + B5 | Ser hidratant intensiv</a>
+                            
+                            <a href="https://www.notino.ro/la-roche-posay/anthelios-uvmune-400-fluid-protector-invizibil-spf-50/" class="product-link resource-link">La Roche-Posay Anthelios | Protecție solară SPF 50+</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <%- include("../fragmente/footer") %>
+    </div>
+</body>
+</html>

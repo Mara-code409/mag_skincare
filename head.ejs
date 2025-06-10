@@ -1,0 +1,251 @@
+<!-- ================================================================= -->
+<!-- ETAPA 4 - FRAGMENTUL HEAD.EJS CORECT -->
+<!-- Cerința: decuparea părții de head care nu se schimbă între pagini -->
+<!-- Include: meta tags, favicon, CSS general, scripturi generale -->
+<!-- ================================================================= -->
+
+<!-- Encoding și viewport - comune pentru toate paginile -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Meta informații comune -->
+<meta name="keywords" content="îngrijire piele,skincare, produse cosmetice, rutină de îngrijire,ten sănătos,produse naturale, frumusețe, dermato-cosmetice, hidratare, curățare ten">
+<meta name="description" content="GlowEssence - magazin online cu produse premium de skincare pentru toate tipurile de ten">
+<meta name="author" content="Tanase Mara">
+
+<!-- ETAPA 4 - FAVICON INCLUS ÎN FRAGMENT -->
+<!-- Toate variantele de favicon pentru diferite dispozitive -->
+<link rel="icon" type="image/png" href="/imagini/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/imagini/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/imagini/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/imagini/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/imagini/favicon/site.webmanifest" />
+
+<!-- ETAPA 4 - CSS GENERAL INCLUS ÎN FRAGMENT -->
+<!-- Fișierele CSS care se aplică pe toate paginile -->
+<link rel="stylesheet" type="text/css" href="/css/css.css">
+<link rel="stylesheet" href="/css/stilizare-linkuri.css">
+
+<!-- Font-uri externe comune -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
+<!-- Font Awesome pentru icoane -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- ETAPA 4 - STILURI PENTRU MENIU INCLUSE ÎN HEAD -->
+<!-- Stilurile pentru meniul principal și responsive design -->
+<style>
+    /* Stiluri pentru meniul principal și header */
+    .header {
+      position: relative;
+      background-color: #A6D8D4;
+      padding: 15px;
+    }
+    
+    /* Meniu principal */
+    .header nav .meniu {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    /* Elemente principale din meniu */
+    .header nav .meniu > li {
+      position: relative;
+      margin-right: 5px;
+    }
+    
+    /* Link-uri principale din meniu */
+    .header nav .meniu > li > a {
+      display: block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 -20px 15px rgba(255, 255, 255, 0);
+      transition: text-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    /* Hover pe link-uri principale */
+    .header nav .meniu > li > a:hover {
+      text-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Submeniu */
+    .header nav .meniu > li > ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: 
+        transform 0.5s ease,
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        height 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* Hover pe submeniu */
+    .header nav .meniu > li:hover > ul {
+      opacity: 1;
+      visibility: visible;
+      height: auto;
+      transform: scaleY(1);
+    }
+    
+    /* Elemente din submeniu */
+    .header nav .meniu > li > ul li {
+      border-bottom: 1px solid rgba(184, 178, 167, 0.2);
+    }
+    
+    /* Link-uri din submeniu */
+    .header nav .meniu > li > ul li a {
+      display: block;
+      padding: 10px 15px;
+      color: #333333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    /* Hover pe link-uri din submeniu */
+    .header nav .meniu > li > ul li a:hover {
+      background-color: #F6DFEB;
+    }
+    
+    /* Efect de subliniere pentru link-uri principale */
+    .header nav .meniu > li > a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: white;
+      transition: width 0.5s ease, left 0.5s ease;
+      transform: translateX(0);
+    }
+    
+    /* Hover pe efect de subliniere */
+    .header nav .meniu > li > a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+    
+    /* Efect pentru litere */
+    .header nav .meniu > li > a span {
+      display: inline-block;
+      transition: letter-spacing 0.3s ease;
+    }
+    
+    /* Hover pe efect pentru litere */
+    .header nav .meniu > li > a:hover span {
+      letter-spacing: 2px;
+    }
+    
+    /* MENIU HAMBURGER PENTRU MOBIL */
+    .hamburger-checkbox {
+      display: none;
+    }
+
+    #hamburger-btn {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 1000;
+      background: transparent;
+      border: none;
+    }
+
+    .hamburger-bar {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-bar:nth-child(1) {
+      top: 0;
+    }
+
+    .hamburger-bar:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hamburger-bar:nth-child(3) {
+      bottom: 0;
+    }
+
+    /* Media query pentru mobil */
+    @media (max-width: 768px) {
+      #hamburger-btn {
+        display: block;
+      }
+      
+      .header nav {
+        display: none;
+      }
+      
+      /* Când meniul mobil este deschis */
+      #hamburger-toggle:checked ~ nav {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #A6D8D4;
+        z-index: 999;
+        padding-top: 60px;
+      }
+      
+      /* Afișare meniu vertical */
+      #hamburger-toggle:checked ~ nav .meniu {
+        flex-direction: column;
+      }
+      
+      /* Elemente din meniul mobil */
+      #hamburger-toggle:checked ~ nav .meniu > li {
+        margin-right: 0;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s forwards;
+      }
+      
+      /* Delay pentru animații */
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(1) { animation-delay: 0.1s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(2) { animation-delay: 0.2s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(3) { animation-delay: 0.3s; }
+      #hamburger-toggle:checked ~ nav .meniu > li:nth-child(4) { animation-delay: 0.4s; }
+      
+      /* Keyframes pentru animații */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+</style>

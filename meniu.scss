@@ -1,36 +1,170 @@
-// Variabile SASS
+// ==========================================
+// 8. MEDIA QUERIES PENTRU RESPONSIVE DESIGN
+// ==========================================
+
+// Media query pentru mobil - activarea meniului hamburger
+@media (max-width: 768px) {
+  // Afișăm butonul hamburger pe mobil
+  #hamburger-btn {
+    display: block;
+  }
+  
+  // IMBRICAREA SASS pentru stiluri mobile
+  .header {
+    nav {
+      display: none; // Ascundem meniul normal
+      
+      // Când hamburger-ul e activat
+      &.active {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: $color-primary;
+        z-index: 999;
+        padding-top: 60px;
+        
+        // IMBRICAREA SASS pentru meniul mobil
+        .meniu {
+          flex-direction: column;
+          
+          // IMBRICAREA SASS pentru elementele mobile
+          > li {
+            margin-right: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+            
+            // Link-urile pe mobil
+            > a, > label.submenu-toggle {
+              padding: 15px 20px;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+              
+              // Efectul pentru litere pe mobil
+              span {
+                display: inline-block;
+                animation: letterEffect 0.3s forwards;
+                animation-delay: 0.5s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}// ==========================================
+// ETAPA 3: MENIU DERULANT CU SASS
+// Identificator: variante-meniu
+// ==========================================
+
+// ==========================================
+// 1. VARIABILE SASS (CERINȚA)
+// ==========================================
+
+// Culori principale - pentru schimbare ușoară de temă
 $color-primary: #A6D8D4;
 $color-secondary: #F6DFEB;
 $color-text: #333333;
 $color-text-light: white;
 $color-border: #B8B2A7;
 $color-highlight: #F7F6F2;
+
+// Timpi de tranziție
 $transition-speed: 0.3s;
 $transition-speed-slow: 0.5s;
+
+// Dimensiuni și spațieri
 $menu-item-padding: 10px 15px;
 $submenu-width: 200px;
 $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
 
-// Mixins pentru tranzitii
+// Variabile pentru poziția elementelor (CERINȚA SASS)
+// Acestea vor fi folosite în instrucțiunile @for pentru generarea automată
+$menu-items-count: 5;
+$submenu-items-count: 5;
+$animation-base-delay: 0.1s;
+$mobile-animation-delay: 0.2s;
+
+// ==========================================
+// 2. MIXINS SASS (CERINȚA)
+// Pentru realizarea selectorilor complecși și cod reutilizabil
+// ==========================================
+
+// Mixin pentru tranzitii - cod reutilizabil pentru toate tranzițiile
 @mixin transition($property, $duration: $transition-speed, $timing: ease) {
   transition: $property $duration $timing;
 }
 
-// Umbra care "alunecă" de sus - exact ca în videoclip
+// CERINȚA SPECIFICĂ: Umbra care "alunecă" - exact ca în videoclip
+// Efectul: umbra se mută de jos în sus la hover
 @mixin shadow-transition {
-  text-shadow: 0 -20px 15px rgba(255, 255, 255, 0); // Umbra începe deasupra
-  transition: text-shadow 0.3s ease;
+  // Starea inițială: umbra jos (vizibilă)
+  text-shadow: 0 8px 15px rgba(255, 255, 255, 0.6);
+  transition: text-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
   &:hover {
-    text-shadow: 0 5px 15px rgba(255, 255, 255, 0.5); // Umbra "alunecă" în jos
+    // La hover: umbra sus (se mută deasupra)
+    text-shadow: 0 -8px 15px rgba(255, 255, 255, 0.8);
   }
 }
 
+// Mixin pentru tranziții de background
 @mixin background-transition {
   transition: background-color 0.3s ease;
 }
 
-// Stiluri pentru meniu - layout similar cu cel din videoclip
+// CERINȚA SPECIFICĂ: Scalarea submeniurilor de la 0 la înălțime totală
+@mixin submenu-scale-animation {
+  opacity: 0;
+  visibility: hidden;
+  transform: scaleY(0);  // Începe de la 0
+  transform-origin: top; // Scalarea începe de sus
+  transition: transform 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
+  
+  &.show,
+  .header .meniu > li:hover > & {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1); // Se scalează la înălțimea totală
+  }
+}
+
+// CERINȚA SPECIFICĂ: Sublinierea treptată pentru submeniuri
+@mixin underline-effect($color: white) {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;            // Începe cu lățime 0
+    height: 2px;
+    background-color: $color;
+    transition: width 0.5s ease, left 0.5s ease; // Tranziția treptată
+  }
+  
+  &:hover::after {
+    width: 100%;        // Se extinde la lățime completă
+    left: 0;
+  }
+}
+
+// Mixin pentru schimbarea background-ului la hover
+@mixin background-hover($hover-color, $transition-duration: $transition-speed) {
+  @include background-transition;
+  
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// ==========================================
+// 3. STILURI PENTRU MENIU DESKTOP (CERINȚA IMBRICAREA SASS)
+// ==========================================
+
+// Versiunea principală a meniului - folosind imbricarea SASS
 .meniu-principal {
   list-style-type: none;
   padding: 0;
@@ -38,47 +172,38 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
   display: flex;
   background-color: $menu-bg;
   
+  // IMBRICAREA SASS - elemente principale din meniu
   > li {
     position: relative;
     
+    // Link-urile principale cu toate efectele
     > a {
       display: block;
       padding: $menu-item-padding;
       color: $color-text-light;
       text-decoration: none;
       font-weight: bold;
-      @include shadow-transition;
       position: relative;
       
-      // Efect de subliniere treptată
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background-color: $color-primary;
-        transition: width 0.5s ease, left 0.5s ease;
-      }
+      // CERINȚA: Aplicăm efectul de umbră care alunecă
+      @include shadow-transition;
       
-      &:hover::after {
-        width: 100%;
-        left: 0;
-      }
+      // CERINȚA: Efect de subliniere treptată
+      @include underline-effect($color-primary);
       
-      // Efect pentru litere (letterSpacing)
+      // Efectul pentru litere (letterSpacing)
       span {
         display: inline-block;
         transition: letter-spacing 0.3s ease;
-      }
-      
-      &:hover span {
-        letter-spacing: 2px;
+        
+        // La hover, literele se îndepărtează
+        #{&}:hover & {
+          letter-spacing: 2px;
+        }
       }
     }
     
-    // Stiluri pentru submeniu - exact ca în videoclip
+    // IMBRICAREA SASS - submeniurile
     > ul {
       position: absolute;
       top: 100%;
@@ -89,15 +214,15 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
       padding: 0;
       margin: 0;
       z-index: 100;
-      opacity: 0;
-      visibility: hidden;
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.5s ease, opacity 0.3s ease, visibility 0.3s ease;
       
+      // CERINȚA: Aplicăm efectul de scalare
+      @include submenu-scale-animation;
+      
+      // IMBRICAREA SASS - elementele din submeniu
       li {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         
+        // Link-urile din submeniu
         a {
           display: block;
           padding: $menu-item-padding;
@@ -105,70 +230,55 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
           text-decoration: none;
           background-color: rgba(60, 60, 60, 0.9);
           
+          // CERINȚA: Schimbarea background-ului la hover
           &:hover {
             background-color: rgba(90, 90, 90, 0.9);
           }
         }
         
+        // Ultimul element nu are bordură
         &:last-child {
           border-bottom: none;
         }
       }
     }
-    
-    // Efect de scalare pentru submeniu - conform videoclipului
-    &:hover > ul {
-      opacity: 1;
-      visibility: visible;
-      transform: scaleY(1);
-    }
   }
 }
 
-// Versiunea pentru headerul tău existent
+// ==========================================
+// 4. VERSIUNEA PENTRU HEADERUL EXISTENT (IMBRICAREA SASS)
+// ==========================================
+
 .header {
   nav {
+    // IMBRICAREA SASS pentru structura meniului
     .meniu {
       list-style-type: none;
       padding: 0;
       margin: 0;
       display: flex;
       
+      // IMBRICAREA SASS - elemente principale
       > li {
         position: relative;
         margin-right: 5px;
         
+        // Link-urile și label-urile principale
         > a, > label.submenu-toggle {
           display: block;
           padding: $menu-item-padding;
           color: $color-text-light;
           text-decoration: none;
           font-weight: bold;
-          text-shadow: 0 -20px 15px rgba(255, 255, 255, 0); // Umbra începe deasupra
-          transition: text-shadow 0.3s ease;
           position: relative;
           
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: $color-text-light;
-            transition: width 0.5s ease, left 0.5s ease;
-            transform: translateX(0);
-          }
+          // CERINȚA: Aplicăm efectul de umbră care alunecă
+          @include shadow-transition;
           
-          &:hover {
-            text-shadow: 0 5px 15px rgba(255, 255, 255, 0.5); // Umbra "alunecă" în jos
-            
-            &::after {
-              width: 100%;
-              left: 0;
-            }
-          }
+          // CERINȚA: Efect de subliniere treptată
+          @include underline-effect($color-text-light);
           
+          // Efectul pentru litere
           span {
             display: inline-block;
             transition: letter-spacing 0.3s ease;
@@ -179,7 +289,7 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
           }
         }
         
-        // Stiluri submeniu
+        // IMBRICAREA SASS - submeniurile
         > ul {
           position: absolute;
           top: 100%;
@@ -190,29 +300,41 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
           padding: 0;
           margin: 0;
           z-index: 100;
-          opacity: 0;
-          visibility: hidden;
-          height: 0;
-          transform: scaleY(0);
-          transform-origin: top;
-          transition: 
-            transform 0.5s ease,
-            opacity 0.3s ease,
-            visibility 0.3s ease,
-            height 0.3s ease;
           
+          // CERINȚA: Aplicăm efectul de scalare
+          @include submenu-scale-animation;
+          
+          // IMBRICAREA SASS - elementele din submeniu
           li {
             border-bottom: 1px solid rgba($color-border, 0.2);
             
+            // CERINȚA: Aplicăm efectul de background hover
+            @include background-hover($color-secondary);
+            
+            // Link-urile din submeniu
             a {
               display: block;
               padding: $menu-item-padding;
               color: $color-text;
               text-decoration: none;
-              transition: background-color 0.3s ease;
+              position: relative;
+              @include transition(background-color);
               
-              &:hover {
-                background-color: $color-secondary;
+              // CERINȚA: Sublinierea treptată pentru submeniu
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: 8px;
+                left: 20px;
+                right: 20px;
+                height: 1px;
+                background-color: $color-text;
+                width: 0;
+                @include transition(width, $transition-speed, ease-out);
+              }
+              
+              &:hover::after {
+                width: calc(100% - 40px);
               }
             }
             
@@ -221,23 +343,78 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
             }
           }
         }
-        
-        &:hover > ul {
-          opacity: 1;
-          visibility: visible;
-          height: auto;
-          transform: scaleY(1);
-        }
       }
     }
   }
 }
 
-// Stil pentru meniu mobil
+// ==========================================
+// 5. INSTRUCȚIUNI REPETITIVE SASS - @for și @while (CERINȚA)
+// Variabile SASS dependente de poziția elementelor
+// ==========================================
+
+// CERINȚA: Folosirea @for pentru generarea delay-urilor secvențiale
+// Generăm delay-uri pentru animații bazate pe poziția elementului
+@for $i from 1 through $menu-items-count {
+  .header nav .meniu > li:nth-child(#{$i}) {
+    // Variabilă SASS dependentă de poziția elementului (CERINȚA)
+    $delay: $i * $animation-base-delay;
+    
+    // Pentru animații desktop - delay-ul crește cu poziția
+    &:hover {
+      transition-delay: #{$delay};
+    }
+  }
+}
+
+// CERINȚA: Folosirea @for pentru animații mobile secvențiale
+// Generăm delay-uri pentru meniul mobil
+@for $i from 1 through $menu-items-count {
+  #hamburger-toggle:checked ~ nav .meniu > li:nth-child(#{$i}) {
+    // Variabilă SASS dependentă de poziția elementului
+    $mobile-delay: $i * $mobile-animation-delay;
+    animation-delay: #{$mobile-delay};
+  }
+}
+
+// CERINȚA: Folosirea @for pentru submeniu items
+// Generare stiluri pentru elementele din submeniu bazate pe poziție
+@for $j from 1 through $submenu-items-count {
+  .header nav .meniu > li:hover > ul li:nth-child(#{$j}) {
+    // Variabilă dependentă de poziția în submeniu
+    $submenu-delay: $j * ($animation-base-delay * 0.5);
+    transition-delay: #{$submenu-delay};
+  }
+}
+
+// CERINȚA: Folosirea @while pentru generare alternativă
+// Exemplu de utilizare @while pentru bara hamburger
+$counter: 1;
+@while $counter <= 3 {
+  .hamburger-bar:nth-child(#{$counter}) {
+    // Proprietăți specifice fiecărei bare bazate pe poziție
+    @if $counter == 1 {
+      top: #{($counter - 1) * 15}px;
+    } @else if $counter == 2 {
+      top: 50%;
+      transform: translateY(-50%);
+    } @else {
+      bottom: 0;
+    }
+  }
+  $counter: $counter + 1; // Incrementăm contorul pentru @while
+}
+
+// ==========================================
+// 6. MENIU HAMBURGER PENTRU MOBIL
+// ==========================================
+
+// Checkbox-urile pentru control (ascunse)
 .hamburger-checkbox {
   display: none;
 }
 
+// Butonul hamburger
 #hamburger-btn {
   display: none;
   position: absolute;
@@ -251,6 +428,7 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
   border: none;
 }
 
+// Liniile hamburger-ului
 .hamburger-bar {
   display: block;
   position: absolute;
@@ -260,6 +438,7 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
   transition: all 0.3s ease;
 }
 
+// Pozițiile inițiale ale liniilor (generate cu @while mai sus)
 .hamburger-bar:nth-child(1) {
   top: 0;
 }
@@ -273,21 +452,29 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
   bottom: 0;
 }
 
-#hamburger-toggle:checked ~ #hamburger-btn .hamburger-bar:nth-child(1) {
-  animation: rotateBar45 0.5s forwards;
-  animation-delay: 0ms;
+// Animații pentru transformarea hamburger-ului când e deschis
+#hamburger-toggle:checked ~ #hamburger-btn {
+  .hamburger-bar:nth-child(1) {
+    animation: rotateBar45 0.5s forwards;
+    animation-delay: 0ms;
+  }
+  
+  .hamburger-bar:nth-child(2) {
+    animation: fadeOutBar 0.5s forwards;
+    animation-delay: 100ms;
+  }
+  
+  .hamburger-bar:nth-child(3) {
+    animation: rotateBarNeg45 0.5s forwards;
+    animation-delay: 200ms;
+  }
 }
 
-#hamburger-toggle:checked ~ #hamburger-btn .hamburger-bar:nth-child(2) {
-  animation: fadeOutBar 0.5s forwards;
-  animation-delay: 100ms;
-}
+// ==========================================
+// 7. KEYFRAMES PENTRU ANIMAȚII
+// ==========================================
 
-#hamburger-toggle:checked ~ #hamburger-btn .hamburger-bar:nth-child(3) {
-  animation: rotateBarNeg45 0.5s forwards;
-  animation-delay: 200ms;
-}
-
+// Animații pentru hamburger
 @keyframes rotateBar45 {
   0% {
     top: 0;
@@ -319,16 +506,46 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
   }
 }
 
-// Media query pentru mobil
+// Animații pentru meniul mobil
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes letterEffect {
+  0% { 
+    letter-spacing: -1px; 
+    transform: scaleX(0.9); 
+  }
+  50% { 
+    letter-spacing: 3px; 
+    transform: scaleX(1.1); 
+  }
+  100% { 
+    letter-spacing: 2px; 
+    transform: scaleX(1); 
+  }
+}
+
+// ==========================================
+// 8. MEDIA QUERIES PENTRU RESPONSIVE DESIGN
+// ==========================================
+
+// Media query pentru mobil - activarea meniului hamburger
 @media (max-width: 768px) {
+  // Afișăm butonul hamburger pe mobil
   #hamburger-btn {
     display: block;
   }
   
+  // IMBRICAREA SASS pentru stiluri mobile
   .header {
     nav {
-      display: none;
+      display: none; // Ascundem meniul normal
       
+      // Când hamburger-ul e activat
       &.active {
         display: block;
         position: fixed;
@@ -340,9 +557,11 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
         z-index: 999;
         padding-top: 60px;
         
+        // IMBRICAREA SASS pentru meniul mobil
         .meniu {
           flex-direction: column;
           
+          // IMBRICAREA SASS pentru elementele mobile
           > li {
             margin-right: 0;
             width: 100%;
@@ -350,16 +569,12 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
             transform: translateY(20px);
             animation: fadeInUp 0.5s forwards;
             
-            @for $i from 1 through 5 {
-              &:nth-child(#{$i}) {
-                animation-delay: #{$i * 0.1}s;
-              }
-            }
-            
+            // Link-urile pe mobil
             > a, > label.submenu-toggle {
               padding: 15px 20px;
               border-bottom: 1px solid rgba(255, 255, 255, 0.1);
               
+              // Efectul pentru litere pe mobil
               span {
                 display: inline-block;
                 animation: letterEffect 0.3s forwards;
@@ -371,17 +586,9 @@ $menu-bg: #000000; // Fundal negru pentru meniu conform videoclipului
       }
     }
   }
-  
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes letterEffect {
-    0% { letter-spacing: -1px; transform: scaleX(0.9); }
-    50% { letter-spacing: 3px; transform: scaleX(1.1); }
-    100% { letter-spacing: 2px; transform: scaleX(1); }
-  }
 }
+
+// ==========================================
+// SFÂRȘITUL ETAPEI 3: MENIU DERULANT CU SASS
+// ==========================================
+

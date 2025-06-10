@@ -1,0 +1,62 @@
+<!-- ===================================================================== -->
+<!-- FRAGMENT GALERIE STATICĂ - ETAPA 5 -->
+<!-- Poate fi inclus în orice pagină folosind <%- include('fragmente/galerie') %> -->
+<!-- ===================================================================== -->
+
+<% if (typeof imaginiGalerie !== 'undefined' && imaginiGalerie.length > 0) { %>
+<section class="galerie-statica" id="galerie">
+    <h2>Galeria noastră de produse</h2>
+    <p class="galerie-descriere">Descoperă produsele noastre premium selectate special pentru această perioadă</p>
+    
+    <div class="galerie-grid">
+        <% imaginiGalerie.forEach((imagine, index) => { %>
+            <figure class="galerie-item" data-index="<%= index %>">
+                <picture>
+                    <!-- Sursă pentru ecrane mari (peste 768px) -->
+                    <source media="(min-width: 769px)" srcset="<%= imagine.cale_completa %>">
+                    
+                    <!-- Sursă pentru ecrane medii (481px - 768px) -->
+                    <source media="(min-width: 481px) and (max-width: 768px)" srcset="<%= imagine.cale_mediu %>">
+                    
+                    <!-- Sursă pentru ecrane mici (până la 480px) -->
+                    <source media="(max-width: 480px)" srcset="<%= imagine.cale_mic %>">
+                    
+                    <!-- Imaginea default (fallback) -->
+                    <img src="<%= imagine.cale_completa %>" 
+                         alt="<%= imagine.alt %>" 
+                         title="<%= imagine.text_descriere %>"
+                         loading="lazy">
+                </picture>
+                
+                <figcaption class="galerie-caption">
+                    <span class="galerie-index"></span><%= imagine.text_descriere %>
+                </figcaption>
+                
+                <!-- Atribuire pentru imaginile CC-BY -->
+                <% if (imagine.atribuire) { %>
+                <div class="galerie-atribuire">
+                    <small>
+                        Foto: <a href="<%= imagine.atribuire.url %>" target="_blank" rel="noopener">
+                            <%= imagine.atribuire.autor %>
+                        </a> - <%= imagine.atribuire.licenta %>
+                    </small>
+                </div>
+                <% } %>
+            </figure>
+        <% }); %>
+    </div>
+    
+    <div class="galerie-info">
+        <p><small>
+            Imaginile sunt filtrate în funcție de perioada curentă. 
+            Afișăm <%= imaginiGalerie.length %> produs<%= imaginiGalerie.length === 1 ? '' : 'e' %> 
+            din colecția noastră.
+        </small></p>
+    </div>
+</section>
+<% } else { %>
+<section class="galerie-statica galerie-goala">
+    <h2>Galeria noastră de produse</h2>
+    <p>În acest moment nu avem produse disponibile pentru această perioadă. Reveniți în curând!</p>
+</section>
+<% } %>

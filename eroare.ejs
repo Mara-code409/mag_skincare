@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <%- include("../fragmente/head") %>
+    <title><%= locals.titlu || "Eroare" %> | GlowEssence</title>
+    <style>
+        .eroare-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            min-height: 60vh;
+        }
+        
+        .eroare-imagine {
+            max-width: 300px;
+            margin-bottom: 2rem;
+        }
+        
+        .eroare-titlu {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #b05c7f;
+        }
+        
+        .eroare-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .eroare-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .eroare-link:hover {
+            background-color: #8ec9c5;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <%- include("../fragmente/header") %>
+        
+        <main>
+            <div class="eroare-container">
+                <h1 class="eroare-titlu"><%= locals.titlu || "A apărut o eroare" %></h1>
+                <% if(locals.imagine){ %>
+                    <img src="<%= imagine %>" alt="Imagine eroare" class="eroare-imagine">
+                <% } %>
+                <p class="eroare-text"><%= locals.text || "Ne pare rău, a apărut o eroare neașteptată." %></p>
+                <a href="/" class="eroare-link">Înapoi la pagina principală</a>
+            </div>
+        </main>
+        
+        <%- include("../fragmente/footer") %>
+    </div>
+</body>
+</html>
